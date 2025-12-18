@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Beauty & Wellness Center</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fff6f9;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(to right, #f8a1c4, #caa6ff);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            background-color: #ffffff;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #b04ecf;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #f48fb1;
+        }
+
+        section {
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #b04ecf;
+            margin-bottom: 40px;
+        }
+
+        /* SERVICES */
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .service-box {
+            background-color: white;
+            border-radius: 15px;
+            width: 300px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .service-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-box img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .service-box h3 {
+            color: #f48fb1;
+            margin-bottom: 10px;
+        }
+
+        /* GALLERY */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* TESTIMONIALS */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .testimonial-box {
+            background-color: #f8f0fa;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-box p {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-box h4 {
+            text-align: right;
+            color: #b04ecf;
+            margin: 0;
+        }
+
+        /* CONTACT */
+        .contact {
+            background: linear-gradient(to right, #caa6ff, #f8a1c4);
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        /* MAP */
+        .map-container {
+            margin-top: 40px;
+            text-align: center;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            border: none;
+            border-radius: 15px;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #2c2c2c;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* VIDEO MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 80%;
+            max-width: 900px;
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* IMAGE MODAL */
+        .img-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 15px;
+        }
+
+        .img-modal .close-img {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* RESERVATION */
+        #reservation form input, #reservation form select, #reservation form button {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        #reservation form input, #reservation form select {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        #reservation form button {
+            background: linear-gradient(to right,#f8a1c4,#caa6ff);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Beauty & Wellness Center</h1>
+    <p>Relax • Refresh • Renew</p>
+</header>
+
+<nav>
+    <a href="#about">About Us</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#reservation">Reservation</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<section id="about">
+    <h2>About Us</h2>
+    <p style="text-align:center;">
+        Our Beauty & Wellness Center provides professional beauty and relaxation services.
+        We combine modern techniques with a peaceful atmosphere to help you feel renewed.
+    </p>
+</section>
+
+<section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+        <div class="service-box" onclick="openVideo('https://www.tiktok.com/embed/7524294122513927479')">
+            <img src="https://koreamikwang.net/wp-content/uploads/2023/12/skincarecourse-1536x1024.jpg" alt="Skin Care">
+            <h3>Skin Care</h3>
+            <p>Advanced facial treatments and skincare solutions.</p>
+        </div>
+        <div class="service-box" onclick="openVideo('https://www.tiktok.com/embed/7505872036942613768')">
+            <img src="https://www.100percentpure.com/cdn/shop/articles/HP-Feature_e8bbfe99-89c0-41ce-a54c-1ae8f00ad610_1200x1200.jpg?v=1590058753" alt="Hair Treatments">
+            <h3>Hair Treatments</h3>
+            <p>Professional hair care and nourishing treatments.</p>
+        </div>
+        <div class="service-box" onclick="openVideo('https://www.tiktok.com/embed/7438634182248582432')">
+            <img src="https://healthylifeonly.com/wp-content/uploads/2020/08/The-Luxurious-Massage-and-Spa-1024x768.jpg" alt="Spa & Massage">
+            <h3>Spa & Massage</h3>
+            <p>Relaxing spa therapies and massage experiences.</p>
+        </div>
+    </div>
+</section>
+
+<!-- VIDEO MODAL -->
+<div class="modal" id="videoModal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <iframe id="videoFrame" src="" allowfullscreen></iframe>
+    </div>
+</div>
+
+<section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery">
+        <img src="https://edocarchitects.com/wp-content/uploads/2020/07/LUCIA-MAGNANI-SKINCARE-BODY-TREATMENT-ROOM-01-1612x1076.jpg" alt="Gallery Image 1" onclick="openImage(this.src)">
+        <img src="https://img.freepik.com/premium-photo/interior-beauty-salon-pink-tones_1034910-43651.jpg?w=996" alt="Gallery Image 2" onclick="openImage(this.src)">
+        <img src="https://img.freepik.com/premium-photo/modern-interior-beauty-salon-purple-colors_1089554-6304.jpg?w=2000" alt="Gallery Image 3" onclick="openImage(this.src)">
+    </div>
+</section>
+
+<!-- IMAGE MODAL -->
+<div class="img-modal" id="imgModal">
+    <span class="close-img" onclick="closeImage()">&times;</span>
+    <img id="imgModalSrc" src="">
+</div>
+
+<section id="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonials">
+        <div class="testimonial-box">
+            <p>"Absolutely loved my facial! My skin feels amazing and refreshed."</p>
+            <h4>- Emily R.</h4>
+        </div>
+        <div class="testimonial-box">
+            <p>"The spa massage was pure bliss. I left completely relaxed."</p>
+            <h4>- Jason M.</h4>
+        </div>
+        <div class="testimonial-box">
+            <p>"Hair treatments here are fantastic! My hair has never felt healthier."</p>
+            <h4>- Sofia K.</h4>
+        </div>
+        <div class="testimonial-box">
+            <p>"Professional, welcoming staff and beautiful environment."</p>
+            <h4>- Liam T.</h4>
+        </div>
+    </div>
+</section>
+
+<section id="reservation">
+    <h2>Book an Appointment</h2>
+    <form onsubmit="return submitReservation(event)">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="service">Select Service:</label>
+        <select id="service" name="service" required>
+            <option value="Skin Care">Skin Care</option>
+            <option value="Hair Treatments">Hair Treatments</option>
+            <option value="Spa & Massage">Spa & Massage</option>
+        </select>
+
+        <label for="date">Preferred Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="time">Preferred Time:</label>
+        <input type="time" id="time" name="time" required>
+
+        <button type="submit">Book Now</button>
+    </form>
+</section>
+
+<section id="contact">
+    <div class="contact">
+        <h2>Contact Us</h2>
+        <p>Email: info@beautywellness.com</p>
+        <p>Phone: +90 555 123 45 67</p>
+        <p>Address: Istanbul, Turkey</p>
+
+        <div class="map-container" style="margin-top:40px;">
+            <h2>Find Us Here</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.8675051298035!2d28.97835841525883!3d41.00823887930379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caba0ee7c8b4fb%3A0x98f6e93b33c7a88b!2sIstanbul!5e0!3m2!1sen!2str!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Beauty & Wellness Center | All Rights Reserved</p>
+</footer>
+
+<script>
+    // Video modal
+    function openVideo(url){
+        document.getElementById('videoFrame').src = url;
+        document.getElementById('videoModal').style.display = 'flex';
+    }
+    function closeModal(){
+        document.getElementById('videoFrame').src = '';
+        document.getElementById('videoModal').style.display = 'none';
+    }
+
+    // Image modal
+    function openImage(src){
+        document.getElementById('imgModalSrc').src = src;
+        document.getElementById('imgModal').style.display = 'flex';
+    }
+    function closeImage(){
+        document.getElementById('imgModalSrc').src = '';
+        document.getElementById('imgModal').style.display = 'none';
+    }
+
+    // Reservation form
+    function submitReservation(event){
+        event.preventDefault();
+        alert("Thank you! Your appointment has been submitted. We will contact you soon.");
+        document.querySelector("#reservation form").reset();
+        return false;
+    }
+</script>
+
+</body>
+</html>
